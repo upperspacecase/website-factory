@@ -82,7 +82,7 @@ Tell the user:
 #### Step 1: Clone template repo
 
 ```bash
-gh repo clone upperspacecase/tradietemplate-v2 ~/Documents/development/[business-slug]
+gh repo clone upperspacecase/adam-smith-electrician ~/Documents/development/[business-slug]
 cd ~/Documents/development/[business-slug]
 rm -rf .git
 ```
@@ -91,23 +91,69 @@ The template repo is a complete, working Next.js + Tailwind site. Everything is 
 
 #### Step 2: Update siteConfig.js
 
-Edit `config/siteConfig.js` with the prospect's real data from the Notion database:
+Edit `config/siteConfig.js` with the prospect's real data from the Notion database. The template has a full siteConfig structure — update ALL fields:
 
 ```javascript
 const siteConfig = {
   businessName: "[from Google Maps]",
-  tagline: "[generate: Licensed [Trade] Serving [Location]]",
+  tagline: "[generate: Licensed [Trade] Serving [Location] Since [year]]",
   phone: "[from Google Maps]",
   phoneHref: "tel:[formatted]",
   email: "[from Google Maps or generate]",
   address: "[from Google Maps]",
-  // ... fill in services, reviews from Google data
+  licenseNumber: "[from Google Maps or leave generic e.g. 'Fully Licensed']",
+  yearEstablished: [year or estimate],
+  hoursOfOperation: "Mon-Fri: 7am - 6pm | Sat: 8am - 2pm",
+  emergencyAvailable: true,
+
+  trustBar: {
+    googleRating: [from Google Maps],
+    googleReviewCount: [from Google Maps],
+    yearsInBusiness: [calculated],
+    credential: "[e.g. Master Electrician, Licensed Plumber]",
+  },
+
+  services: [
+    // 6 services with title, description, icon (Lucide icon name)
+    // Use trade defaults below for service titles
+  ],
+
+  about: {
+    headline: "[generate: trust-focused headline]",
+    text: "[generate: 2-3 sentences about the business, location, experience]",
+    image: null,
+  },
+
+  reviews: {
+    businessName: "[from Google Maps]",
+    rating: [from Google Maps],
+    totalReviews: [from Google Maps],
+    googleMapsUrl: "[Google Maps review URL]",
+    items: [
+      // 3-5 reviews with author, rating, date, text, avatar: null
+      // Use real Google reviews if available, otherwise generate realistic ones
+    ],
+  },
+
+  serviceArea: {
+    mapEmbedUrl: "[Google Maps embed URL for the location]",
+    suburbs: [
+      // 12-16 nearby suburbs/neighborhoods
+    ],
+  },
+
+  contactForm: {
+    serviceOptions: [
+      // Match the service titles + "Emergency Call-Out" + "Other"
+    ],
+    recipientEmail: "[same as email above]",
+  },
 };
 ```
 
-**For services:** Use standard services for the trade type. See trade defaults below.
+**For services:** Use standard services for the trade type. See trade defaults below. Each service needs a Lucide icon name (e.g. House, Building2, Siren, PlugZap, BatteryCharging, Lightbulb, Wrench, Droplets, Flame, Hammer).
 
-**For reviews:** Use Google Maps review data if available from the discovery phase, otherwise use 2-3 generic but realistic reviews.
+**For reviews:** Use Google Maps review data if available from the discovery phase, otherwise generate 3-5 realistic reviews mentioning the location and specific services.
 
 **For copy:** Apply the **copywriting** skill principles:
 - Headline: specific, benefit-focused, mentions location
@@ -222,5 +268,5 @@ Update Notion Status = "Email Drafted".
 - [ ] Notion MCP for CRM
 - [ ] Gmail MCP for email drafts (authenticate at claude.ai > Settings > Connected Apps > Gmail)
 - [ ] GitHub CLI (`gh auth status`)
-- [ ] Template repo at `upperspacecase/tradietemplate-v2`
+- [ ] Template repo at `upperspacecase/adam-smith-electrician`
 - [ ] Node.js and npm
