@@ -1,58 +1,38 @@
 # Cold Outreach Email Template
 
+## The Email
+
+**Subject:** built you a site
+
+```
+Hi {{first_name}},
+
+97% of your future customers will Google you and look at your website before they call.
+
+So I built you a website: {{demo_site_url}}
+
+It's yours for $1,000 USD.
+
+Optional: I'll manage the leads for $200/month after that.
+
+Take a look. If it's not for you, no worries.
+
+{{your_name}}
+```
+
 ## Variables
-- `{businessName}` — The prospect's business name
-- `{ownerName}` — Owner/contact name (if known, otherwise "there")
-- `{location}` — Their suburb/city
-- `{websiteUrl}` — The live website we built for them
-- `{trade}` — Their trade (electrician, plumber, builder, etc.)
-- `{senderName}` — Your name
-- `{senderPhone}` — Your phone number
 
----
+- `{{first_name}}` — Prospect's first name from Google Maps data. If unknown, use "there".
+- `{{demo_site_url}}` — The deployed website URL.
+- `{{your_name}}` — Your name. Ask once at start of batch, reuse for all.
 
-## Template: No Existing Website
+## Delivery
 
-**Subject:** I built {businessName} a website
-
-Hi {ownerName},
-
-I came across {businessName} on Google Maps — {reviewCount} reviews at {rating} stars is impressive. But I noticed you don't have a website, which means you're probably losing jobs to competitors who do.
-
-So I built you one: {websiteUrl}
-
-It's mobile-friendly, fast, and has your real business info and reviews. If you like it, I can hand it over and set it up on your own domain for a one-time fee. No lock-in contracts.
-
-Worth a quick look?
-
-{senderName}
-{senderPhone}
-
----
-
-## Template: Bad Existing Website
-
-**Subject:** A fresh look for {businessName}
-
-Hi {ownerName},
-
-I'm a web designer in {location} and I had a look at your current site. With {reviewCount} Google reviews, your reputation is strong — but your website isn't doing it justice.
-
-I put together a modern version to show what's possible: {websiteUrl}
-
-Same info, just presented in a way that converts visitors into calls. Mobile-friendly, loads fast, looks premium.
-
-Happy to walk you through it if you're interested. No obligation.
-
-{senderName}
-{senderPhone}
-
----
+Create as a **Gmail draft** using Gmail MCP `create_draft` tool.
+If Gmail MCP unavailable, store in Notion "Email Draft" field.
 
 ## Rules
-- Never send unsolicited bulk emails — these are drafted for manual, personalized sending
-- Always let the user review and approve before sending
-- Keep under 150 words
-- Lead with the value (the live site), not a sales pitch
-- Include one clear CTA
-- Casual, direct tone — like texting a mate, not a corporate email
+
+- Do not modify the template. Use it exactly as written.
+- Subject line is always: `built you a site`
+- No follow-up sequence unless the user asks for one.

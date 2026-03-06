@@ -163,19 +163,25 @@ Parameters:
 
 **Email template:**
 ```
-Hey [name/there],
+Hi {{first_name}},
 
-I noticed [BusinessName] doesn't have a website — with [X] Google reviews at [rating] stars, you're leaving money on the table.
+97% of your future customers will Google you and look at your website before they call.
 
-So I made you one: [url]
+So I built you a website: {{demo_site_url}}
 
-Your real info, mobile-friendly, loads fast. If you want it on your domain, I can set that up. No contracts.
+It's yours for $1,000 USD.
 
-Worth a look?
+Optional: I'll manage the leads for $200/month after that.
 
-[senderName]
-[senderPhone]
+Take a look. If it's not for you, no worries.
+
+{{your_name}}
 ```
+
+**Variables:**
+- `{{first_name}}` — Prospect's first name (from Google Maps business owner or just "there")
+- `{{demo_site_url}}` — The deployed site URL
+- `{{your_name}}` — User's name (ask once, reuse for all emails)
 
 **If Gmail MCP is not authenticated**, save the draft to Notion "Email Draft" field instead and tell the user to authenticate Gmail MCP (`claude.ai > Settings > Connected Apps > Gmail`).
 
