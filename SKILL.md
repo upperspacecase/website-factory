@@ -140,19 +140,29 @@ gh repo create [github-username]/[business-slug] --public --source=. --push
 
 Update Notion: set GitHub Repo URL, Status = "Built".
 
-#### Step 6: Draft outreach email
+#### Step 6: Draft outreach email in Gmail
 
-Use the **cold-email** skill principles. The email should:
+Use the **cold-email** skill principles. Create the email as a **draft in Gmail** using the Gmail MCP `create_draft` tool.
+
+**The email should:**
 - Be under 100 words
 - Lead with the live site URL (the value)
 - Sound like a human, not a sales machine
 - Have one clear CTA (reply or call)
 - Subject line: 2-4 words, lowercase
+- To: prospect's email from Google Maps data
 
-**Template:**
+**Use Gmail MCP:**
 ```
-Subject: built you a site
+Tool: mcp__gmail__create_draft
+Parameters:
+  to: [prospect email]
+  subject: built you a site
+  body: [email body below]
+```
 
+**Email template:**
+```
 Hey [name/there],
 
 I noticed [BusinessName] doesn't have a website — with [X] Google reviews at [rating] stars, you're leaving money on the table.
@@ -167,9 +177,11 @@ Worth a look?
 [senderPhone]
 ```
 
-Store draft in Notion "Email Draft" field. Status = "Email Drafted".
+**If Gmail MCP is not authenticated**, save the draft to Notion "Email Draft" field instead and tell the user to authenticate Gmail MCP (`claude.ai > Settings > Connected Apps > Gmail`).
 
-**Stop. User deploys and sends emails manually.**
+Update Notion Status = "Email Drafted".
+
+**Stop. User reviews drafts in Gmail and sends manually.**
 
 ---
 
@@ -202,6 +214,7 @@ Store draft in Notion "Email Draft" field. Status = "Email Drafted".
 
 - [ ] Apify MCP or web search for discovery
 - [ ] Notion MCP for CRM
+- [ ] Gmail MCP for email drafts (authenticate at claude.ai > Settings > Connected Apps > Gmail)
 - [ ] GitHub CLI (`gh auth status`)
 - [ ] Template repo at `upperspacecase/tradietemplate-v2`
 - [ ] Node.js and npm
