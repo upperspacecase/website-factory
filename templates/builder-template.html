@@ -1,0 +1,131 @@
+<!-- Builder Landing Page Hero -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Builder Landing Page Hero</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#0b50da",
+                "background-light": "#f5f6f8",
+                "background-dark": "#101622",
+            },
+            fontFamily: {
+                "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+    },
+}
+</script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+
+<!-- ============================================ -->
+<!-- SECTION 1: HERO with full-bleed background   -->
+<!-- ============================================ -->
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="absolute top-0 w-full z-10 flex items-center justify-between whitespace-nowrap px-10 py-6">
+    <div class="flex items-center gap-4 text-white">
+        <h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">{businessName}</h2>
+    </div>
+    <nav class="hidden md:flex items-center gap-9">
+        <a class="text-white hover:text-white/80 transition-colors text-sm font-medium" href="#services">Services</a>
+        <a class="text-white hover:text-white/80 transition-colors text-sm font-medium" href="#about">About</a>
+        <a class="text-white hover:text-white/80 transition-colors text-sm font-medium" href="#contact">Contact</a>
+    </nav>
+</header>
+
+<main class="flex-1 flex flex-col h-screen">
+    <div class="flex-1 w-full bg-cover bg-center bg-no-repeat relative flex flex-col justify-end pb-24 px-10 md:px-20 lg:px-40"
+         style='background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%), url("{heroImageUrl}");'>
+        <div class="max-w-[960px] flex flex-col gap-6 z-10 relative">
+            <div class="flex flex-col gap-4 text-left">
+                <h1 class="text-white text-5xl font-black leading-[1.1] tracking-[-0.04em] md:text-7xl lg:text-8xl">
+                    {headline}
+                </h1>
+                <h2 class="text-white/90 text-lg font-normal leading-relaxed md:text-xl max-w-2xl mt-4">
+                    {tagline}
+                </h2>
+            </div>
+            <div class="mt-8">
+                <a href="tel:{phone}" class="inline-flex items-center justify-center overflow-hidden rounded h-14 px-8 bg-white text-slate-900 hover:bg-slate-100 transition-colors text-sm font-bold uppercase tracking-[0.05em] md:text-base cursor-pointer">
+                    Call {phone}
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 2: SERVICES                          -->
+<!-- ============================================ -->
+<section id="services" class="bg-background-light py-20 px-10 md:px-20 lg:px-40">
+    <div class="max-w-[960px] mx-auto">
+        <p class="text-primary text-sm font-bold uppercase tracking-widest mb-2">What We Do</p>
+        <h2 class="text-slate-900 text-4xl font-bold leading-tight tracking-[-0.02em] mb-12">{servicesHeadline}</h2>
+        <!-- Repeat for each service -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service card template -->
+            <div class="bg-white rounded-xl p-8 border border-slate-200 hover:border-primary/30 transition-colors cursor-default">
+                <h3 class="text-xl font-bold text-slate-900 mb-3">{serviceName}</h3>
+                <p class="text-slate-600 text-base leading-relaxed">{serviceDescription}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 3: SOCIAL PROOF / REVIEWS            -->
+<!-- ============================================ -->
+<section class="bg-white py-20 px-10 md:px-20 lg:px-40">
+    <div class="max-w-[960px] mx-auto">
+        <p class="text-primary text-sm font-bold uppercase tracking-widest mb-2">What Our Clients Say</p>
+        <h2 class="text-slate-900 text-4xl font-bold leading-tight tracking-[-0.02em] mb-12">{rating} Stars from {reviewCount} Reviews</h2>
+        <!-- Review cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-background-light rounded-xl p-6">
+                <div class="flex gap-1 mb-3"><!-- 5 star SVGs --></div>
+                <p class="text-slate-700 text-base leading-relaxed mb-4">"{reviewText}"</p>
+                <p class="text-slate-900 font-semibold text-sm">{reviewAuthor}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 4: CTA                               -->
+<!-- ============================================ -->
+<section id="contact" class="bg-background-light py-20 px-10 md:px-20 lg:px-40">
+    <div class="max-w-[600px] mx-auto">
+        <div class="flex flex-col items-center justify-center gap-6 px-10 py-20 bg-primary/5 rounded-3xl text-center">
+            <h2 class="text-slate-900 tracking-tight text-3xl font-black leading-tight">
+                Ready to get started?
+            </h2>
+            <p class="text-slate-600 text-lg font-normal leading-relaxed">
+                Call us today for a free quote.
+            </p>
+            <a href="tel:{phone}" class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-8 bg-primary text-white text-base font-bold tracking-wide hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                Call {phone}
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- FOOTER                                       -->
+<!-- ============================================ -->
+<footer class="flex flex-col gap-6 px-10 py-10 text-center border-t border-slate-200">
+    <p class="text-slate-400 text-sm">&copy; {year} {businessName}. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
