@@ -32,7 +32,7 @@ WhatsApp: https://wa.me/447778725456
 ## Delivery
 
 Create as a **Gmail draft** using Gmail MCP `create_draft` tool.
-If Gmail MCP unavailable, store in Notion "Email Draft" field.
+The template is also stored in `crm.json` under `emailTemplate` for the dashboard preview.
 
 ## Rules
 

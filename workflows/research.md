@@ -1,15 +1,14 @@
 <required_reading>
 Read references/trade-defaults.md for service lists per trade type.
-Read references/target-cities.md for the pre-researched list of target cities.
 </required_reading>
 
 <objective>
 Find [trade] businesses in [location] via Google Maps that have NO website listed.
-Score by review count. Add to the existing Tradie Website CRM in Notion.
+Score by review count. Add to the local CRM at ~/Documents/development/website-factory/crm.json.
 </objective>
 
 <city_selection>
-If no location is specified, pull the next city from the **Target Cities** Notion database (data source ID: `de8405d4-507e-443a-80a6-3ae604a621d2`). Pick the city with the lowest Priority number that has Status = "Not Started". After completing research for a city, update its Status to "Research Done" and set the "Prospects Found" count.
+If no location is specified, read the `cities` array in crm.json. Pick the next city with `status: "not_started"`. After completing research for a city, update its status to `"research_done"` and set `prospectsFound`.
 </city_selection>
 
 <process>
@@ -32,7 +31,7 @@ If no location is specified, pull the next city from the **Target Cities** Notio
 ## Step 2: Filter
 
 **Simple rule: Does the business have a website URL in Google Maps?**
-- No website → PROSPECT (add to database)
+- No website → PROSPECT (add to CRM)
 - Has website → SKIP
 
 Do NOT fetch or visit any URLs. Do NOT assess website quality.
@@ -42,55 +41,60 @@ Skip businesses that are not actually the target trade (e.g. a "Repair service" 
 
 Score = review count. More reviews = more established = better prospect.
 
-**Tiers (maps to Priority field):**
-- **Hot:** 50+ reviews, no website. Established business losing leads.
-- **Warm:** 10-49 reviews, no website. Growing business.
-- **Cold:** Under 10 reviews, no website. May be too new/small.
+**Tiers (maps to priority):**
+- **hot:** 50+ reviews, no website. Established business losing leads.
+- **warm:** 10-49 reviews, no website. Growing business.
+- **cold:** Under 10 reviews, no website. May be too new/small.
 
-## Step 4: Add to existing Notion CRM
+## Step 4: Add to local CRM
 
-**IMPORTANT: Do NOT create a new database. Always add rows to the existing Tradie Website CRM.**
+Read `~/Documents/development/website-factory/crm.json`, then append new prospects to the `prospects` array.
 
-Database: `Tradie Website CRM`
-Data source ID: `80c5d3e2-b35f-4d8a-a19b-bed4b11b9f2b`
+**Each prospect object:**
 
-Use `mcp__claude_ai_Notion__notion-create-pages` with parent `{"data_source_id": "80c5d3e2-b35f-4d8a-a19b-bed4b11b9f2b"}`.
+```json
+{
+  "id": "[business-slug]",
+  "businessName": "[from Google Maps]",
+  "phone": "[from Google Maps]",
+  "email": "[from Google Maps or empty]",
+  "address": "[from Google Maps]",
+  "city": "[city, state]",
+  "trade": "[Electrician/Plumber/etc]",
+  "placeId": "[from Google Maps]",
+  "googleRating": [number],
+  "googleReviews": [number],
+  "ownerName": "",
+  "pipelineStage": "lead",
+  "outreachStatus": "not_contacted",
+  "repo": "",
+  "demoUrl": "",
+  "vercelUrl": null,
+  "emailSentDate": null,
+  "lastContactDate": null,
+  "notes": ""
+}
+```
 
-**Fields to populate for each prospect:**
+Also update the city record in the `cities` array:
+- `status`: `"research_done"`
+- `prospectsFound`: count of prospects added
 
-| Field | Value |
-|-------|-------|
-| Business Name | From Google Maps |
-| Google Reviews | Review count from Google Maps |
-| Google Rating | Rating from Google Maps |
-| Priority | Hot / Warm / Cold (based on tier) |
-| Phone | From Google Maps |
-| City | From Google Maps |
-| State/Region | From Google Maps |
-| Country | US / UK / Australia / Canada / New Zealand |
-| Trade | Electrician / Plumber / Builder / etc. |
-| Source | Google Maps |
-| Pipeline Stage | Lead |
-| Outreach Status | Not Contacted |
-| Has Website | __NO__ |
-| Website Quality | None |
-| Email | From Google Maps if available |
-| Owner Name | From Google Maps if available |
-| Notes | Include the Google Maps placeId for use in the build phase |
+Write the updated crm.json back. **This is 1 read + 1 write — much cheaper than Notion.**
 
 ## Step 5: Report and stop
 
 Tell the user:
-> "Found {X} [trade] businesses in [location] without a website. {Y} Hot, {Z} Warm. Added to the Tradie Website CRM. Set Pipeline Stage to 'Researched' for the ones you want websites built for."
+> "Found {X} [trade] businesses in [location] without a website. {Y} Hot, {Z} Warm. Added to crm.json. Review at http://localhost:3456 and tell me when you're ready to build."
 
 **Stop. Wait for user approval before building anything.**
 
 </process>
 
 <success_criteria>
-- Prospects added to the existing Tradie Website CRM (NOT a new database)
-- Each prospect has Priority tier assigned
-- Pipeline Stage set to "Lead" for all new entries
-- placeId saved in Notes for build phase
-- User has been told to approve prospects before next phase
+- Prospects added to crm.json prospects array
+- Each prospect has correct fields populated
+- placeId saved for build phase enrichment
+- City status updated in crm.json
+- User told to review and approve before next phase
 </success_criteria>

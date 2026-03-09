@@ -1,6 +1,6 @@
 ---
 name: website-factory
-description: "Two-phase system for building and selling websites to trades businesses. Phase 1 (Research): Discover Google Maps businesses without websites, rank by review count, create Notion CRM. Phase 2 (Build): Clone template repo, update siteConfig with business data, push to GitHub, draft outreach email. Trigger: 'website factory', 'find tradies', 'prospect [trade] in [location]', 'build websites for [trade]'."
+description: "Two-phase system for building and selling websites to trades businesses. Phase 1 (Research): Discover Google Maps businesses without websites, rank by review count, add to local CRM. Phase 2 (Build): Clone template repo, update siteConfig with business data, push to GitHub, draft outreach email. Trigger: 'website factory', 'find tradies', 'prospect [trade] in [location]', 'build websites for [trade]'."
 ---
 
 <essential_principles>
@@ -8,7 +8,7 @@ description: "Two-phase system for building and selling websites to trades busin
 This skill finds trades businesses that need websites, builds sites for them, and drafts cold outreach emails to sell them.
 
 **Two phases, always in order:**
-1. **Research** — find prospects, score them, save to Notion
+1. **Research** — find prospects, score them, save to local CRM
 2. **Build** — clone template, customize, push to GitHub, draft email
 
 **Hard rules:**
@@ -17,14 +17,16 @@ This skill finds trades businesses that need websites, builds sites for them, an
 - Never scaffold from scratch. Always clone the template repo.
 - Never send emails. Only create Gmail drafts. User sends manually.
 - Always stop between phases. User must approve prospects before building.
+- Subagents NEVER draft emails. Main agent handles all outreach using the exact template from crm.json.
 
 **Dependencies:**
-- Apify MCP (preferred) or web search for Google Maps discovery
-- Notion MCP for CRM database
-- Gmail MCP for email drafts (fallback: save to Notion)
+- Apify MCP for Google Maps discovery
+- Gmail MCP for email drafts
 - GitHub CLI (`gh auth status`)
 - Template repo: `upperspacecase/adam-smith-electrician`
 - Node.js and npm
+- Local CRM: `~/Documents/development/website-factory/crm.json`
+- Dashboard: `http://localhost:3456` (start with `cd ~/Documents/development/website-factory && node server.js`)
 
 </essential_principles>
 

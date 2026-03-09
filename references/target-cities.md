@@ -1,19 +1,15 @@
 # Target Cities
 
-A curated list of 20 US cities for website factory outreach is maintained in the **Target Cities** database in Notion, under the **Tradie Website Business** page.
-
-**Notion Database:** Target Cities
-**Data Source ID:** `de8405d4-507e-443a-80a6-3ae604a621d2`
-**Database URL:** https://www.notion.so/a3870667bfec4340b98fa38d6d6433b3
+The list of 20 target US cities is stored in the `cities` array in `~/Documents/development/website-factory/crm.json`.
 
 ## How to use
 
-When running Phase 1 (Research), pull the next city from this database:
-1. Fetch the Target Cities database
-2. Find the next city with Status = "Not Started" (ordered by Priority, lowest first)
+When running Phase 1 (Research) with no location specified:
+1. Read crm.json
+2. Find the next city with `status: "not_started"`
 3. Run the research workflow for that city
-4. Update the city's Status to "Research Done" and set "Prospects Found" count
-5. After build phase, update "Sites Built" and "Emails Sent" counts
+4. Update the city's `status` to `"research_done"` and set `prospectsFound`
+5. After build phase, update `sitesBuilt`
 
 ## Selection criteria (for adding more cities later)
 
@@ -28,6 +24,6 @@ Sources used: Census Bureau population data, NAHB building permit data, construc
 
 ## Current progress
 
-- **Cities researched:** 0 / 20
-- **Last city completed:** None
-- **Next city:** Huntsville, AL (Priority 1)
+- **Cities researched:** 1 / 20
+- **Last city completed:** Huntsville, AL (20 sites built)
+- **Next city:** Boise, ID
