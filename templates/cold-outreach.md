@@ -18,13 +18,16 @@ Optional: I'll manage the leads for $200/month after that.
 Take a look. If it's not for you, no worries.
 
 {{your_name}}
+
+iMessage: taytoddpattison@gmail.com
+WhatsApp: https://wa.me/447778725456
 ```
 
 ## Variables
 
 - `{{first_name}}` — Prospect's first name from Google Maps data. If unknown, use "there".
 - `{{demo_site_url}}` — The deployed website URL.
-- `{{your_name}}` — Your name. Ask once at start of batch, reuse for all.
+- `{{your_name}}` — Default: "Tay Pattison". Ask once at start of batch, reuse for all.
 
 ## Delivery
 

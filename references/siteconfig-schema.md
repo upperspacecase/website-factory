@@ -3,6 +3,12 @@
 Full structure of `config/siteConfig.js` in the template repo.
 Update ALL fields for each prospect.
 
+**IMPORTANT — Data deduplication rules:**
+- `trustBar` only contains `credential`. Rating, review count, and years in business are derived automatically from `reviews.rating`, `reviews.totalReviews`, and `yearEstablished`.
+- `reviews` does NOT contain `businessName`. The component reads from top-level `businessName`.
+- `contactForm` does NOT contain `recipientEmail`. The API route reads from top-level `email`.
+- Do NOT duplicate these values or the site will show stale data.
+
 ```javascript
 const siteConfig = {
   // ── Business Info ──
@@ -10,6 +16,7 @@ const siteConfig = {
   tagline: "[generate: Licensed [Trade] Serving [Location] Since [year]]",
   phone: "[from Google Maps]",
   phoneHref: "tel:[formatted with country code]",
+  smsHref: "sms:[formatted with country code]",
   email: "[from Google Maps or generate: info@businessslug.com]",
   address: "[from Google Maps]",
   licenseNumber: "[from Google Maps or 'Fully Licensed']",
@@ -18,10 +25,8 @@ const siteConfig = {
   emergencyAvailable: true,
 
   // ── Trust Bar ──
+  // Only credential here. Rating, reviews, and years are derived automatically.
   trustBar: {
-    googleRating: [from Google Maps, e.g. 4.8],
-    googleReviewCount: [from Google Maps, e.g. 47],
-    yearsInBusiness: [current year - yearEstablished],
     credential: "[e.g. Master Electrician, Licensed Plumber]",
   },
 
@@ -40,12 +45,12 @@ const siteConfig = {
   about: {
     headline: "[generate: trust-focused, e.g. 'Trusted. Local. Licensed.']",
     text: "[generate: 2-3 sentences about the business, location, years of experience]",
-    image: null,
+    image: "/images/team.jpg", // or null if no image
   },
 
   // ── Reviews ──
+  // No businessName here — derived from top-level businessName.
   reviews: {
-    businessName: "[from Google Maps]",
     rating: [from Google Maps],
     totalReviews: [from Google Maps],
     googleMapsUrl: "https://search.google.com/local/writereview?placeid=[PLACE_ID]",
@@ -70,11 +75,11 @@ const siteConfig = {
   },
 
   // ── Contact Form ──
+  // No recipientEmail here — derived from top-level email.
   contactForm: {
     serviceOptions: [
       // Match service titles + "Emergency Call-Out" + "Other"
     ],
-    recipientEmail: "[same as email above]",
   },
 };
 
